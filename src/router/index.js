@@ -22,17 +22,19 @@ const routes = [
   {
     path: '/router_demo',
     name: 'RouterDemo',
-    component: RouterDemo
-  },
-  {
-    path: '/a',
-    name: 'a',
-    component: () => import('../components/A.vue')
-  },
-  {
-    path: '/b',
-    name: 'b',
-    component: () => import('../components/B.vue')
+    component: RouterDemo,
+    children: [
+      {
+        path: '/a',
+        name: 'a',
+        component: () => import('../components/A.vue')
+      },
+      {
+        path: '/b',
+        name: 'b',
+        component: () => import('../components/B.vue')
+      }
+    ]
   }
 ]
 
