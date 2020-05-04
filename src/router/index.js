@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RouterDemo from '../views/RouterDemo.vue'
+import Store from '../store'
 
 Vue.use(VueRouter)
 
@@ -35,11 +36,27 @@ const routes = [
         component: () => import('../components/B.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
   }
 ]
 
 const router = new VueRouter({
   routes
 })
+
+// 路由的前置
+router.beforeEach((to, from, next) => {
+  if (!Store.state.userInfo.username && to.path != '/login') {
+    console.log('jump to login')
+    next({ path: '/login' });
+  } else {
+    console.log('jump to next')
+    next();
+  }
+});
 
 export default router
